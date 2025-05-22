@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="icon/x-icon" href="https://myapps.classlink.com/assets/images/classlink-logo.svg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  My Apps </title>
+ <!--   <div class="announcement-evade">
+        <div class="name-space">TaleseOwnSagLock | @FlowerBedJeb</div>
+        <div class="divider"></div>
+        <div class="message">Announcement : Version 3.0.0 is coming out of beta soon so be aware 👀.</div>
+    </div> -->
+<button class="error-button"> Version 3.0.0</button>
+<div class="time-container" id="timeDisplay">Loading time...</div>
+</head>
+<body>
+    <style>
+/*divider*/ 
+body {
+            font-family: 'Roboto', sans-serif;
+            background-size: cover; /* Makes the image cover the entire screen */
+            background-position: center; /* Centers the image */
+            background-repeat: repeat; /* Prevents tiling */
+            height: 100vh; /* Ensures full viewport height */
+            margin: 0; 
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-y: scroll;
+        }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* optional: makes background fixed during scroll */
+}
+/* Define themes */
+body.theme-blue {
+  background-image: url('https://t4.ftcdn.net/jpg/08/96/56/53/360_F_896565357_fmPjmJPX8vKdZ7FGodwE3F8pxkFEfuCX.jpg  ');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  color: #000;
+}
+
+body.theme-green {
+  background-image: url('https://files.123freevectors.com/wp-content/original/119417-green-abstract-background-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #222;
+  color: #fff;
+}
+body.theme-red {
+  background-image: url('https://img.goodfon.com/original/6000x4080/b/6a/3d-rendering-background-design-abstract-geometry-geometric-s.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  color: #000;
+}
+
+        .cmd-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 2000;
+        }
+
+        .cmd-input {
+            width: 80%;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid white;
+            outline: none;
+        }
+
+        .cmd-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0; /* Canvas is at the back */
+        }
+
+        #openNewTabButton:hover, #resetButton:hover, #settingsButton:hover {
+            box-shadow: 0 0 10px #3498db, 0 0 20px #3498db;
+        }
+
+        #openNewTabButton:active, #resetButton:active {
+            box-shadow: 0 0 15px #5dade2;
+        }
+
+#settingsMenu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    width: 350px;
+    text-align: left;
+    z-index: 1000; 
+    color: #fff;
+    font-family: Arial, sans-serif;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.Announcement-Roblox1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+
+        
+        .announcement-evade {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Translucent black */
+    padding: 15px 30px;
+    border: 2px solid #00aafe; /* Yellow border */
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+    z-index: 1000;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    text-align: center;
+}
+
+.announcement-evade .divider {
+    width: 100%;
+    height: 2px;
+    background-color: #00aafe; /* Yellow divider line */
+    margin: 10px 0;
+}
+
+.announcement-evade .name-space {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00aafe; /* Yellow name text */
+}
+
+   
+        .fade-out {
+            opacity: 0;
+            transform: translateX(-100%) translateX(100%);
+        }
+
+#settingsMenu h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+    text-align: center;
+}
+
+#settingsMenu label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+#settingsMenu input, #settingsMenu select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+    outline: none;
+}
+
+.time-container {
+    background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+    color: rgba(255, 255, 255, 1); /* Fully opaque white text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 110px;
+    text-align: center;
+    display: block;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#settingsMenu button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#settingsMenu button:hover {
+    background-color: #0056b3;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Overlay for better visibility */
+#settingsOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+        .input-wrapper {
+  height: 45px;
+  border-radius: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  background-color: #292524;
+}
+
+.input {
+  flex-grow: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding-left: 15px;
+  background-color: #fefefe;
+  color: #fefefe;
+  font-size: 1em;
+  border-radius: 20px;
+}
+
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.Subscribe-btn {
+  height: 100%;
+  width: 95px;
+  border: none;
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  background-color: #ffffff;
+  font-weight: 500;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.Subscribe-btn:hover {
+  font-size: 77%;
+  transition: 300ms;
+}
+
+@keyframes jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.Subscribe-btn:active {
+  transform: scale(0.9);
+}
+
+
+.error-button {
+    background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+    color: rgba(255, 255, 255, 1); /* Fully opaque white text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 130px;
+    text-align: center;
+    display: block;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+        
+.url-button {
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1), /* Solid white start */
+        rgba(255, 255, 255, 0.6)  /* Fully transparent end */
+    );
+    color: rgb(0, 0, 0); /* Black text for contrast */
+    font-size: 14px;
+    font-weight: 570;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-in-out;
+}
+
+        .url-panic {
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1), /* Solid white start */
+        rgba(255, 255, 255, 0.6)  /* Fully transparent end */
+    );
+    color: rgb(0, 0, 0); /* Black text for contrast */
+    font-size: 14px;
+    font-weight: 570;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-in-out;
+        }
+
+        .gradient-button:hover {
+            opacity: 0.9; /* Slight fade on hover */
+        }
+
+        .gradient-button span {
+            font-size: 18px;
+        }
+
+        
+        .buttonsecurly {
+            background: linear-gradient(to right, #7b7fe6, #364eb7); /* Purple to blue gradient */
+            color: white; /* White text */
+            font-size: 14px;
+            font-weight: 570;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px; /* Rounded corners */
+            cursor: pointer;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease-in-out;
+        }
+
+        .toggle-button {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-right: 8px;
+        }
+
+        .toggle-button.active {
+            background-color: #e74c3c;
+        }
+
+        div[style*="text-align: center;"] {
+            z-index: 1; /* Ensures inputs and buttons are above the canvas */
+            position: relative; /* Create stacking context for z-index */
+        }
+
+        .particle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: fall infinite linear;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    .card {
+    position: fixed;
+    top: 10px;
+    right: 5px;
+    width: 250px;
+    height: 115px;
+    background: rgba(0, 0, 0, 0.8); /* Transparent black */
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    z-index: 900000;
+}
+        .top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pfp {
+            height: 40px;
+            width: 40px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+        }
+        .title-1, .title-2 {
+            color: white;
+            margin: 0;
+        }
+        .title-1 { font-size: 16px; font-weight: bold; }
+        .title-2 { font-size: 12px; font-weight: normal; }
+        .time {
+            width: 90%;
+            background-color: #5e5e5e;
+            height: 6px;
+            border-radius: 3px;
+            margin: 10px auto;
+            cursor: pointer;
+            position: relative;
+        }
+        .elapsed {
+            width: 0%;
+            background-color: #1db954;
+            height: 100%;
+            border-radius: 3px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .controls svg {
+            cursor: pointer;
+            fill: #1db954;
+            width: 25px;
+            height: 25px;
+        }
+        .controls svg:hover {
+            fill: white;
+        }
+        .time-text {
+            color: #1db954;
+            font-size: 10px;
+            margin-top: -5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .blocked {
+            background-color: rgba(0,0,0,0.5);
+            color: rgb(0, 0, 0);
+            padding: 10px 25px;
+            border: rgb(0, 0, 0);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 100000px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .separator {
+            border-top: 2px solid #e09090;
+            margin: 20px 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        
+        .section-header {
+            font-size: 1.5em;
+            color: white;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        .page-title {
+            font-size: 3em;
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .paragraph {
+            font-size: 0.75em;
+            color: white;
+            margin-top: 2.5px;
+            margin-bottom: 5px;
+        }
+
+        .container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    border: 2px solid #555;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    color: #FFC770;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 538503485035340953409583405;
+} 
+        .tite {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(to top, #D88C50, #FFC770);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .content b {
+            color: #FFC770;
+        }
+        .exit-button {
+            margin-top: 20px;
+            background: linear-gradient(to bottom, #a52a2a, #8b0000);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .exit-button:hover {
+            background: linear-gradient(to bottom, #8b0000, #a52a2a);
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="card">
+        <div class="top">
+            <div class="pfp"></div>
+            <div>
+                <p class="title-1">Song Name</p>
+                <p class="title-2">Artist Name</p>
+            </div>
+        </div>
+        <div class="time" onclick="seek(event)">
+            <div class="elapsed"></div>
+        </div>
+        <div class="time-text">
+            <span class="current-time">0:00</span>
+            <span class="total-time">0:00</span>
+        </div>
+        <div class="controls">
+            <svg onclick="prevSong()" viewBox="0 0 24 24"><polygon points="6,12 18,5 18,19"></polygon></svg>
+            <svg class="play" onclick="togglePlay()" viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"></polygon></svg>
+            <svg class="pause" onclick="togglePlay()" viewBox="0 0 24 24" style="display: none;"><rect x="6" y="5" width="5" height="14"></rect><rect x="13" y="5" width="5" height="14"></rect></svg>
+            <svg onclick="nextSong()" viewBox="0 0 24 24"><polygon points="6,5 18,12 6,19"></polygon></svg>
+        </div>
+    </div>
+    
+    <audio id="audio"></audio>
+
+<div>
+<div class="container" id="container">
+    <div class="tite">PLEASE READ</div>
+    <div class="tite">Version 3.0.0</div>
+    <div class="content">
+        <b>New Features</b>
+        <p>• Background Switcher</p>
+        <p>• Settings Button on Links</p>
+        <p>• Panic Button on Links</p>
+        <p>• Desmos Calculator Button on Links</p>
+        <b>Games</b>
+        <p>• Bitlife</p>
+        <p>• Piano Tiles</p>
+        <p>• Stumble Guys</p>
+        <p>• Color Tunnel</p>
+        <b>Why this update sucks and has took long to come out</b>
+        <p>• This was because I was locked in on the proxy which didn't work 😭 but still trying to make it work! So just stay tuned and stay on top</p>
+        <b></b>
+        <b></b>
+        <b></b>
+    </div>
+    <button class="exit-button" onclick="closeContainer()">Exit</button>
+   </div> 
+
+<div style="text-align: center; margin-top: 60px; position: relative; z-index: 1;">
+      <h1 class="page-title">❤👑Harlem My King 👑❤</h1>
+      <h1 class="paragraph">Made by Jebunn "@flowerbedjeb"</p>
+      <p class="paragraph"> </p>
+      <div class="input-wrapper">
+<input type="text" id="urlInput" class="input" placeholder="Enter a URL or search term" style="color: rgb(0, 0, 0);"> 
+    <button id="openNewTabButton" style="background-color: #FFFFFF; color: rgb(0, 0, 0); padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -2px 0 rgba(0, 0, 0, 0.2);">Open</button>
+</div>
+<div style="text-align: center; margin-top: 2px; position: relative; z-index: 1;">
+    <button id="settingsButton" style="font-size: 1.5em; background-color: transparent; border: none; border-radius: 50%; cursor: pointer; color: white; padding: 8px; margin-left: 8px; transition: all 0.3s ease; transform: translateY(4px); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);">⚙️</button>
+      </div>
+    <h5 class="paragraph">*Info and Debugging at the bottom*</h5>
+    <h5 class="paragraph">This website is private and if this site has been leaked it will be blocked and currently this website is only given to a little set of people.</h5>
+    <h5 class="paragraph">Link has been given to Harlem, Angelo, Teon, Michael, Thomas, Jayden, Jason, John, Marcell, Grayson, Aidan, and Adriel</h5>
+</div>
+
+<div id="cmd-bar" class="cmd-bar">
+    <input type="text" id="cmd-input" class="cmd-input" placeholder="Enter command..." />
+</div>
+
+<div id="settingsMenu">
+    <span id="closeMenu" style="float: right; cursor: pointer; color: #ffffff;">❌</span>
+    <h3 style="color: #ffffff; border-bottom: 1px solid #ffffff; padding-bottom: 10px; margin-bottom: 15px;">Settings</h3>
+    
+    <label style="color: #bbb; margin-bottom: 5px; display: block;">Default Browsers:</label>
+    <div style="margin-bottom: 15px;">
+        <button id="googleButton" class="toggle-button active">Google</button>
+        <button id="bingButton" class="toggle-button">Bing</button>
+    </div>
+
+    <label style="color: #bbb; margin-bottom: 5px; display: block;">Tab Title:</label>
+    <input type="text" id="titleInput" style="width: 100%; padding: 8px; border-radius: 8px; border: none; background-color: #f8abab; color: white; box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.3); margin-bottom: 10px;">
+
+    <label style="color: #bbb; margin-bottom: 5px; display: block;">Favicon URL:</label>
+    <input type="text" id="faviconInput" style="width: 100%; padding: 8px; border-radius: 8px; border: none; background-color: #f8abab; color: white; box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.3); margin-bottom: 15px;">
+
+    <div style="margin-bottom: 15px;">
+        <label style="color: #bbb;">Particles:</label>
+        <button id="particlesToggle" class="toggle-button active">On</button>
+    </div>
+    
+    <!-- Injected "Toggle Theme" button -->
+    <button id="themeToggle" class="toggle-button" style="margin-top: 10px;">Switch Theme</button>
+
+    <button id="resetButton" style="background-color: #e74c3c; color: white; padding: 8px 20px; border: none; border-radius: 0 0 8px 8px; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;">Reset</button>
+</div>
+
+<!-- Example Buttons Section -->
+<div style="text-align: center; margin-top: 40px;">
+    <h2 class="section-header">Goto Links</h2>
+    <h5 class="paragraph">Links That most people use or need</p>
+    <div class="separator"></div>
+    <button class="buttonsecurly" data-url="https://www.google.com/search?igu=1&q=" onclick="openURLFromButton(this)">Google</button>
+    <button class="url-button" data-url="https://onecompiler.com/embed/html" onclick="openURLFromButton(this)">HTML Compiler</button>
+    <button class="url-button" data-url="https://www.desmos.com/testing/virginia/scientific" onclick="openURLFromButton(this)">Desmos Scientific Calculator</button>
+    <button class = "url-button" onclick="window.open('https:raw.githubusercontent.com/provxpeuser/IlyHarlemProxy/refs/heads/main/Updates.txt', '_blank')">Updates</button>
+    <button class="url-panic">Panic</button>
+
+
+</div>
+
+<div style="text-align: center; margin-top: 40px;">
+    <h2 class="section-header">Games</h2>
+    <h5 class="paragraph">An Great Asortment of games that are fun when needed to waste time. "Thanks to the Space Proxy for most of these links"</p>
+    <div class="separator"></div>
+    <button class="buttonsecurly" data-url="https://deadshot.io" onclick="openURLFromButton(this)">Deadshot</button>
+    <button class="url-button" data-url="https://slowroads.io" onclick="openURLFromButton(this)">Slowroads</button>
+    <button class="url-button" data-url="https://html5.gamedistribution.com/0c454c9562d249d28ba3a2b50564042c/?timestamp=1713731659&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-7" onclick="openURLFromButton(this)">Vex 7</button>
+    <button class="url-button" data-url="https://probablykam.github.io/Mario64webgl/" onclick="openURLFromButton(this)">Super Mario 64</button>
+        <button class="url-button" data-url="https://f3.silvergames.com/html5/color-tunnel/" onclick="openURLFromButton(this)">Color Tunnel</button>
+    <button class="url-button" data-url="https://3kh0-assets.silvereen.net/3kh0-assets/ball-dodge" onclick="openURLFromButton(this)">Ball Dodge</button>
+        <button class="url-button" data-url="https://h5.4j.com/games/Piano-Tiles-2-Online/index.html?pubid=silvergames&v=1503580918" onclick="openURLFromButton(this)">Piano Tiles</button>
+            <button class="url-button" data-url="https://www.stumbleguys.com/play" onclick="openURLFromButton(this)">Stumble Guys</button>
+    <button class="url-button" data-url="https://helixjumponline.com/" onclick="openURLFromButton(this)">Helix Jump</button>
+     <button class="buttonsecurly" data-url="https://ubg365.github.io/bitlife-life-simulator/play.html" onclick="openURLFromButton(this)">Bitlife</button>
+    <button class="url-button" data-url="https://jcw87.github.io/c2-smb1/" onclick="openURLFromButton(this)">Super Mario Bros</button>
+    <button class="url-button" data-url="https://games.crazygames.com/en_US/mine-shooter---save-your-world/index.html?v=1.295" onclick="openURLFromButton(this)">Mine Shooter</button>
+    <button class="url-button" data-url="https://googlesnakemods.com/v/current/" onclick="openURLFromButton(this)">Google Snake</button>
+    <button class="buttonsecurly" data-url="https://slope-c.glitch.me/" onclick="openURLFromButton(this)">Slope</button>
+    <button class="url-button" data-url="https://softbodytetris.netlify.app" onclick="openURLFromButton(this)">Sofybody Tetris</button>
+    <button class="url-button" data-url="https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html" onclick="openURLFromButton(this)">Subway Surfers</button>
+    <button class="url-button" data-url="https://www.hoodamath.com/mobile/games/drift-boss/game.html" onclick="openURLFromButton(this)">Drift Boss</button>
+    <button class="buttonsecurly" data-url="https://games.cdn.famobi.com/html5games/c/cut-the-rope/v070/?fg_domain=play.famobi.com&fg_aid=A-SILVERGAMES&fg_uid=4531b37c-a8e0-4a67-9ebd-e8d3190b6277&fg_pid=8a24e5f2-94a8-4593-b4e5-81cc68f524c8&fg_beat=969&original_ref=https%3A%2F%2Fwww.silvergames.com%2F" onclick="openURLFromButton(this)">Cut The Rope</button>
+    <button class="url-button" data-url="https://www.2048.org/" onclick="openURLFromButton(this)">2048</button>
+    <button class="buttonsecurly" data-url="https://bab.dev/flappy-bird" onclick="openURLFromButton(this)">Flappy Bird</button>
+    <button class="buttonsecurly" data-url="https://1kh0.github.io/projects/retro-bowl/index.html" onclick="openURLFromButton(this)">Retro Bowl</button>
+    <button class="buttonsecurly" data-url="https://bab.dev/blockblast" onclick="openURLFromButton(this)">Block Blast</button>
+    <button class="buttonsecurly" data-url="https://bab.dev" onclick="openURLFromButton(this)">Bab.Dev</button>
+    </Div>
+    <div style="text-align: center; margin-top: 40px;">
+        <h2 class="section-header">Ovo Versions</h2>
+        <h5 class="paragraph">Modded and other vesrsions of Ovo</p>
+        <div class="separator"></div>
+    <button class="url-button" data-url="https://ovo-5yu.pages.dev/versions/1.4.4b/" onclick="openURLFromButton(this)">OvO Classic</button>
+    <button class="url-button" data-url="https://ovo-5yu.pages.dev/versions/doublejump/" onclick="openURLFromButton(this)">OvO Double Jump</button>
+</div>
+
+    <div style="text-align: center; margin-top: 40px;">
+        <h2 class="section-header">Io Games</h2>
+        <h5 class="paragraph">Games made for the internet and for phones that can work ofline.</p>
+            <div class="separator"></div>
+            <button class="buttonsecurly" data-url="https://1v1.lol/" onclick="openURLFromButton(this)">1v1.lol</button>
+            <button class="buttonsecurly" data-url="https://hole-io.com" onclick="openURLFromButton(this)">Hole.io</button>
+            <button class="buttonsecurly" data-url="https://kour.io" onclick="openURLFromButton(this)">Kour.io</button>
+            <button class="buttonsecurly" data-url="https://slither.io" onclick="openURLFromButton(this)">Slither.io</button>
+            <button class="buttonsecurly" data-url="https://snowball-io.io" onclick="openURLFromButton(this)">Snowball.io</button>
+            <button class="buttonsecurly" data-url="https://paper-io.com/" onclick="openURLFromButton(this)">Paper.io </button>
+        </div>
+    
+<div style="text-align: center; margin-top: 40px;">
+    <h2 class="section-header">Minecraft</h2>
+    <h5 class="paragraph">This is part of games and it is the eaglercraft part of games</p>
+        <div class="separator"></div>
+        <button class="buttonsecurly" data-url="https://eaglercraft.com" onclick="openURLFromButton(this)">Eaglercraft</button>
+        <button class="url-button" data-url="https://html-classic.itch.zone/html/7086310/PrecisionClient-Static-main/index.html" onclick="openURLFromButton(this)">Precision Client</button>
+        <button class="url-button" data-url="https://resent4-0.vercel.app/" onclick="openURLFromButton(this)">Resent 4.0</button>
+    <div class="separator"></div>
+</div>
+
+<div style="text-align: center; margin-top: 40px;">
+    <h2 class="section-header">Information</h2>
+    <div class="separator"></div>
+    <p class="paragraph">Made by Jebunn 🤫 | Thanks to the sini gang 🥷</p>
+    <p class="paragraph">When you open a proxy link press rightshift to open the mod menu</p>
+    <p class="paragraph">The blue buttons get closed out when securly is on due to embed redirects</p>
+    <p class="paragraph">Press Cntl and z or press the panic button at goto links to panic</p>
+    <p class="paragraph">The panic button hides your screen and brings it to google drive or classlink</p>
+    <p class="paragraph">Always include "https://" at the beginning of your URL unless you are surfing the web</p>
+    <p class="paragraph">When using the searchbar, some sites may not work due to CORS policy | Use the proxy</p>
+    <p class="paragraph">If you have a suggestion just wait till I drop a google form.</p>
+</div>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+
+const themes = ['theme-red', 'theme-green', 'theme-blue'];
+let currentThemeIndex = 0; // start with the first theme
+
+const themeToggleBtn = document.getElementById('themeToggle');
+
+if (themeToggleBtn) {
+  // Set initial theme
+  document.body.className = themes[currentThemeIndex];
+
+  themeToggleBtn.addEventListener('click', () => {
+    // Remove current theme class
+    document.body.classList.remove(themes[currentThemeIndex]);
+    // Increment index, wrap around with modulo
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    // Add next theme class
+    document.body.classList.add(themes[currentThemeIndex]);
+  });
+}
+
+        // Get references to the DOM elements for the command bar
+        const cmdBar = document.getElementById("cmd-bar");
+        const cmdInput = document.getElementById("cmd-input");
+
+        let isOpen = false; // State variable to track if the command bar is open
+
+        // History functionality for COMMANDS using localStorage
+        let commandHistory = JSON.parse(localStorage.getItem('commandHistory')) || [];
+        const MAX_COMMAND_HISTORY_SIZE = 20; // Limit the number of command history entries
+
+        // Function to save command history to localStorage
+        function saveCommandHistory() {
+            localStorage.setItem('commandHistory', JSON.stringify(commandHistory));
+        }
+
+        // Function to add a command to command history
+        function addCommandToHistory(command) {
+            // Add only unique commands and keep the history size limited
+            if (commandHistory.includes(command)) {
+                // Move the existing command to the top if it's already there
+                commandHistory = commandHistory.filter(item => item !== command);
+            }
+            commandHistory.unshift(command); // Add to the beginning
+            if (commandHistory.length > MAX_COMMAND_HISTORY_SIZE) {
+                commandHistory.pop(); // Remove the oldest command if over limit
+            }
+            saveCommandHistory();
+        }
+
+        // History functionality for SEARCH URLs using localStorage
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        const MAX_SEARCH_HISTORY_SIZE = 50; // Limit the number of search history entries
+
+        // Function to save search history to localStorage
+        function saveSearchHistory() {
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        }
+
+        // Function to add a URL to search history
+        function addUrlToSearchHistory(url) {
+            // Add only unique URLs and keep the history size limited
+            if (searchHistory.includes(url)) {
+                // Move the existing URL to the top if it's already there
+                searchHistory = searchHistory.filter(item => item !== url);
+            }
+            searchHistory.unshift(url); // Add to the beginning
+            if (searchHistory.length > MAX_SEARCH_HISTORY_SIZE) {
+                searchHistory.pop(); // Remove the oldest URL if over limit
+            }
+            saveSearchHistory();
+        }
+
+        // Function to toggle the visibility of the command bar
+        function toggleCmdBar() {
+            isOpen = !isOpen;
+            cmdBar.style.display = isOpen ? "flex" : "none";
+            if (isOpen) {
+                cmdInput.focus(); // Focus the input when the bar opens
+            }
+        }
+
+        // Listen for the ';' key press to toggle the command bar
+        document.addEventListener("keydown", (event) => {
+            if (event.key === ";") {
+                // Prevent the default behavior of the ';' key if needed
+                // event.preventDefault();
+                toggleCmdBar();
+            }
+        });
+
+        // Function to download a file from a URL
+        function downloadFile(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        // Throw an error for bad HTTP responses (e.g., 404, 500)
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+
+                    // Attempt to get a filename from the URL, fallback to a default
+                    let filename = url.split('/').pop();
+                    if (filename.includes('?')) {
+                        filename = filename.split('?')[0]; // Remove query parameters
+                    }
+                    if (!filename || filename === '') {
+                        filename = 'downloaded_file'; // Default filename if none found
+                    }
+
+                    link.download = filename;
+                    link.click();
+
+                    // Clean up the object URL after the download starts
+                    URL.revokeObjectURL(link.href);
+                })
+                .catch(error => {
+                    console.error("Error downloading file:", error);
+                    // Provide user feedback
+                    alert("Error downloading file. Check the console for details.");
+                });
+        }
+
+
+        // Define custom download commands and URLs (example)
+        const commandMapping = {
+            ";download harlemmykinglite": "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/HarlemMyKingLite.html"
+            // Add other specific download commands here if needed
+        };
+
+        // Execute the code when Enter is pressed in the command input
+        cmdInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                const code = cmdInput.value.trim();
+                if (code) {
+                    const args = code.split(' ');
+                    const command = args[0].toLowerCase();
+
+                    // Add the entered command to command history
+                    addCommandToHistory(code);
+
+                    // Check for the specific ";download harlemmykinglite" command (exact match)
+                    if (commandMapping[code.toLowerCase()]) {
+                         const fileUrl = commandMapping[code.toLowerCase()];
+                         console.log(`Executing command: ${code}`);
+                         downloadFile(fileUrl);
+                    }
+                    // Check for the generic ";downloadurl" command (requires a URL argument)
+                    else if (command === ";downloadurl") {
+                         if (args.length > 1) {
+                             const fileUrl = args[1]; // The URL is the second argument
+                             console.log(`Attempting to download from URL: ${fileUrl}`);
+                             downloadFile(fileUrl);
+                         } else {
+                             console.log("Download URL command requires a URL.");
+                             alert("Please provide a URL after ;downloadurl.");
+                         }
+                     }
+                     // Check for the ";history" command (displays command bar history)
+                     else if (command === ";history") {
+                         console.log("Displaying command history:");
+                         if (commandHistory.length > 0) {
+                             let historyMessage = "Command History:\n";
+                             commandHistory.forEach((histItem, index) => {
+                                 historyMessage += `${index + 1}. ${histItem}\n`;
+                             });
+                             alert(historyMessage); // Display history in an alert box
+                         } else {
+                             alert("Command history is empty.");
+                         }
+                     }
+                     // Check for the ";searchhistory" command (displays main search history)
+                     else if (command === ";searchhistory") {
+                         console.log("Displaying search history:");
+                         if (searchHistory.length > 0) {
+                             let historyMessage = "Search History:\n";
+                             searchHistory.forEach((histItem, index) => {
+                                 historyMessage += `${index + 1}. ${histItem}\n`;
+                             });
+                             alert(historyMessage); // Display search history in an alert box
+                         } else {
+                             alert("Search history is empty.");
+                         }
+                     }
+                    // This is the final 'else' for invalid commands
+                    else {
+                        console.log("Invalid command.");
+                        alert("Invalid command.");
+                    }
+                }
+                cmdInput.value = "";  // Clear the input after execution
+                toggleCmdBar();  // Close the command bar
+            }
+        });
+
+        // Make sure to add the call to addUrlToSearchHistory() in your main search input's event listener
+        // Example (already provided in previous answers, but reminding you where it goes):
+        /*
+        document.getElementById("openNewTabButton").addEventListener("click", function() {
+             let input = document.getElementById("urlInput").value.trim();
+             let url;
+             // ... logic to determine the final URL ...
+             addUrlToSearchHistory(url); // Add this line!
+             // ... logic to open the URL (proxy or direct) ...
+         });
+
+         document.getElementById("urlInput").addEventListener("keypress", function(event) {
+             if (event.key === "Enter") {
+                 let input = document.getElementById("urlInput").value.trim();
+                 let url;
+                 // ... logic to determine the final URL ...
+                 addUrlToSearchHistory(url); // Add this line!
+                 // ... logic to open the URL (proxy or direct) or trigger button click ...
+             }
+         });
+         */
+
+        function closeContainer() {
+            var container = document.getElementById("container");
+            container.remove(); // This will delete the container when the button is clicked
+        }
+
+let currentSearchEngine = "google";
+let particlesEnabled = true;
+
+function isValidURL(string) {
+    try {
+        new URL(string.startsWith("http") ? string : "https://" + string);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+
+function openURLFromButton(button) {
+            let url = button.getAttribute("data-url");
+
+            // Ask user if they want to use the proxy
+            const useProxy = confirm("Do you want to use the proxy?");
+
+            if (useProxy) {
+                OpenWebsiteInProxy(url);
+            } else {
+                loadWebsiteInNewTab(url);
+            }
+        }
+
+const songs = [
+            { title: "Chill Guy Theme", artist: "Hinoki Wood", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/just%20a%20chill%20guy%20listening%20to%20chill%20guy%20music%20%5BTubeRipper.com%5D.m4a", pfp: "https://i.pinimg.com/originals/ba/e6/ee/bae6ee176434ff2774808ad29de2a6e8.jpg" },
+            { title: "Headlock", artist: " Imogen Heap", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/Imogen%20Heap%20-%20Headlock%20(Lyrics).mp3", pfp: "data:image/jpeg;base64,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" },
+            { title: "Doc Mc Stuffins x Thats what I like Remix", artist: "Def Not A White Nigga", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/Doc%20Mcstuffins%20x%20That%20s%20What%20I%20Like%20%7C%20(Mashup)%20Bruno%20Mars%20ft.%20Doc%20Mcstuffins.mp3", pfp: "https://upload.wikimedia.org/wikipedia/en/1/15/Doc_McStuffins_logo.png" },
+            { title: "Tv Off", artist: "Kendrick Lamar", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/Kendrick%20Lamar%20-%20tv%20off%20(Official%20Audio).mp3", pfp: "https://i.ytimg.com/vi/U8F5G5wR1mk/maxresdefault.jpg" },
+            { title: "Nachos", artist: "BabyChiefDoIt", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/BabyChiefDoit%20-%20Nachos%20(Official%20Music%20Video).mp3", pfp: "data:image/jpeg;base64,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" },
+            { title: "New Jeans | Jersey Remix", artist: "Og : Girl Group", url: "https://raw.githubusercontent.com/provxpeuser/Harlem-My-King-V2/refs/heads/main/New%20Jeans%20Jersey%20Remix%20SLOWED%20-%20(Jiandro%20x%20Dxrkaii).mp3", pfp: "data:image/webp;base64,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" },
+        ];
+
+        let currentSongIndex = 0;
+        const audio = document.getElementById("audio");
+        const playBtn = document.querySelector(".play");
+        const pauseBtn = document.querySelector(".pause");
+        const elapsed = document.querySelector(".elapsed");
+        const currentTimeText = document.querySelector(".current-time");
+        const totalTimeText = document.querySelector(".total-time");
+        const pfp = document.querySelector(".pfp");
+
+        function loadSong(index) {
+            const song = songs[index];
+            document.querySelector(".title-1").textContent = song.title;
+            document.querySelector(".title-2").textContent = song.artist;
+            audio.src = song.url;
+            pfp.style.backgroundImage = `url('${song.pfp}')`;
+            audio.load();
+            audio.onloadedmetadata = () => {
+                totalTimeText.textContent = formatTime(audio.duration);
+            };
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.style.display = "none";
+                pauseBtn.style.display = "inline";
+            } else {
+                audio.pause();
+                playBtn.style.display = "inline";
+                pauseBtn.style.display = "none";
+            }
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+            audio.play();
+            updatePlayButton();
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+            audio.play();
+            updatePlayButton();
+        }
+
+        function updatePlayButton() {
+            playBtn.style.display = "none";
+            pauseBtn.style.display = "inline";
+        }
+
+        audio.addEventListener("timeupdate", () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            elapsed.style.width = `${progress}%`;
+            currentTimeText.textContent = formatTime(audio.currentTime);
+        });
+
+        function seek(event) {
+            const bar = document.querySelector(".time");
+            const clickX = event.offsetX;
+            const barWidth = bar.clientWidth;
+            const seekTime = (clickX / barWidth) * audio.duration;
+            audio.currentTime = seekTime;
+        }
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+        }
+
+        // Load first song on page load
+        loadSong(currentSongIndex);
+
+
+
+ function loadWebsiteInNewTab(url) {
+    const title = 'Home - Google Drive';
+    const favicon = 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png';
+    const newTab = window.open();
+
+    const pageContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${title}</title>
+<link rel="icon" href="${favicon}" type="image/x-icon" />
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: linear-gradient(to bottom, red, lightcoral);
+        height: 100vh;
+        position: relative;
+    }
+    .viewer-container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    embed {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .url-bar {
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff4d4d;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 17px;
+        font-weight: bold;
+        color: black;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .url-bar span {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 8px 15px;
+        border-radius: 20px;
+    }
+    .ui-box {
+        position: fixed;
+        top: 555px;
+        right: 24px;
+        background: rgba(211, 47, 47, 0.9);
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        cursor: grab;
+        box-shadow: 0 0 10px rgba(211, 47, 47, 0.8);
+        transition: transform 0.2s ease-in-out;
+    }
+    #settingsMenu {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: rgba(0, 0, 0, 0.95);
+        border-radius: 10px;
+        padding: 20px;
+        color: white;
+        display: none;
+        z-index: 2000;
+    }
+    .setting-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background: #222;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .toggle-btn {
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .enabled {
+        background: green;
+        color: white;
+    }
+    .close-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background: red;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .close-btn:hover {
+        background: darkred;
+    }
+    /* Button container styles */
+    .button-container {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        display: flex;
+        gap: 10px; 
+    }
+    #toggleButton, #driveButton, #desmosButton {
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 100;
+    }
+    #toggleButton.hidden, #driveButton.hidden, #desmosButton.hidden {
+        opacity: 0.5; 
+    }
+    #toggleButton img, #driveButton img, #desmosButton img {
+        width: 24px; 
+        height: 24px; 
+    }
+    /* Styles for the draggable Desmos window */
+    #desmosWindow {
+        position: fixed;
+        width: 400px;
+        height: 300px;
+        top: 100px;
+        left: 100px;
+        background: #fff;
+        border: 2px solid #333;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 2001;
+        display: none;
+        border-radius: 8px;
+        overflow: hidden;
+        /* Make unhighlightable */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        outline: none;
+    }
+    #desmosHeader {
+        background: #f0f0f0;
+        padding: 5px 10px;
+        cursor: grab;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* Make unhighlightable */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        outline: none;
+    }
+    #closeDesmos {
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        outline: none;
+    }
+    #desmosContent {
+        width: 100%;
+        height: calc(100% - 30px);
+        /* Make unhighlightable */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        outline: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="viewer-container">
+    <embed id="EmbeddedPage" src="https://www.google.com"></embed>
+</div>
+
+<div class="url-bar">
+    <span id="urlText"></span>
+</div>
+
+<div class="ui-box" id="uiBox">
+    <span id="timeDisplay"></span> |
+    <span id="fpsCounter"></span> |
+    <span id="pingCounter"></span>
+</div>
+
+<div id="settingsMenu">
+    <h2>👑 Harlem My King 👑 | Mod Menu</h2>
+    <div class="setting-item">
+        <span>Enable Clock</span>
+        <button id="toggleClock" class="toggle-btn enabled">Enabled</button>
+    </div>
+    <div class="setting-item">
+        <span>Enable FPS Counter</span>
+        <button id="toggleFPS" class="toggle-btn enabled">Enabled</button>
+    </div>
+    <div class="setting-item">
+        <span>Enable Ping Counter</span>
+        <button id="togglePing" class="toggle-btn enabled">Enabled</button>
+    </div>
+    <div class="setting-item">
+        <span>Show URL Bar</span>
+        <button id="toggleUrlBar" class="toggle-btn enabled">Enabled</button>
+    </div>
+    <div class="setting-item">
+        <span>Move UI Box</span>
+        <button id="moveUiBox" class="toggle-btn">Enable Drag</button>
+    </div>
+    <button class="close-btn" id="closeMenu">Close</button>
+</div>
+
+<div class="button-container">
+    <button id="toggleButton" title="Settings">
+        <img src="https://static-00.iconduck.com/assets.00/settings-icon-2048x2048-ht9jo5se.png" alt="Menu"/>
+    </button>
+    <button id="driveButton" title="Google Drive">
+        <img src="https://assets.streamlinehq.com/image/private/w_240,h_240,ar_1/f_auto/v1/icons/professional-tools/professional-tool-google-drive-118bd5l4qqqt5pdhxocnt.png/professional-tool-google-drive-g4c61iv4bbcvy0x3kdtfjf.png?_a=DAJFJtWIZAAC" alt="Drive"/>
+    </button>
+    <!-- New button for Desmos calculator -->
+    <button id="desmosButton" title="Open Desmos Calculator">
+        <img src="https://www.iconsdb.com/icons/preview/black/calculator-8-xxl.png" alt="Desmos"/>
+    </button>
+</div>
+
+<!-- Draggable Desmos window -->
+<div id="desmosWindow">
+    <div id="desmosHeader">
+        Desmos Scientific Calculator
+        <button id="closeDesmos">×</button>
+    </div>
+    <div id="desmosContent">
+        <iframe src="https://www.desmos.com/scientific" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+</div>
+
+<script>
+    let url = "${url}";
+    document.getElementById("urlText").textContent = url;
+    document.getElementById("EmbeddedPage").src = url;
+
+    let clockEnabled = true;
+    let fpsEnabled = true;
+    let pingEnabled = true;
+    let moveUiEnabled = false;
+
+    const toggleButton = document.getElementById('toggleButton');
+    const driveButton = document.getElementById('driveButton');
+    const desmosButton = document.getElementById('desmosButton');
+
+    const settingsMenu = document.getElementById('settingsMenu');
+    const uiBox = document.getElementById('uiBox');
+
+    const desmosWindow = document.getElementById('desmosWindow');
+    const closeDesmos = document.getElementById('closeDesmos');
+    const desmosHeader = document.getElementById('desmosHeader');
+
+    let hideTimeout;
+    let driveClickCount = 0;
+
+    // Show/hide UI buttons on hover
+    function showButton() {
+        toggleButton.classList.remove('hidden');
+        driveButton.classList.remove('hidden');
+        desmosButton.classList.remove('hidden');
+        resetHideTimeout();
+    }
+    function resetHideTimeout() {
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            toggleButton.classList.add('hidden');
+            driveButton.classList.add('hidden');
+            desmosButton.classList.add('hidden');
+        }, 5000);
+    }
+    toggleButton.addEventListener('mouseenter', showButton);
+    driveButton.addEventListener('mouseenter', showButton);
+    desmosButton.addEventListener('mouseenter', showButton);
+    toggleButton.addEventListener('mouseleave', resetHideTimeout);
+    driveButton.addEventListener('mouseleave', resetHideTimeout);
+    desmosButton.addEventListener('mouseleave', resetHideTimeout);
+
+    // Settings button
+    toggleButton.addEventListener('click', () => {
+        settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Drive button
+    driveButton.addEventListener('click', () => {
+        driveClickCount++;
+        if (driveClickCount === 2) {
+            location.href = "https://drive.google.com";
+            driveClickCount = 0;
+        } else {
+            setTimeout(() => { driveClickCount = 0; }, 300);
+        }
+    });
+
+    // Desmos button toggles window
+    desmosButton.addEventListener('click', () => {
+        if (desmosWindow.style.display === 'none' || desmosWindow.style.display === '') {
+            desmosWindow.style.display = 'block';
+        } else {
+            desmosWindow.style.display = 'none';
+        }
+    });
+
+    // Close Desmos window
+    document.getElementById('closeDesmos').addEventListener('click', () => {
+        desmosWindow.style.display = 'none';
+    });
+
+    // Dragging for Desmos window
+    desmosHeader.addEventListener('mousedown', (e) => {
+        let isDragging = true;
+        let offsetX = e.clientX - desmosWindow.offsetLeft;
+        let offsetY = e.clientY - desmosWindow.offsetTop;
+
+        function move(e) {
+            if (isDragging) {
+                desmosWindow.style.left = e.clientX - offsetX + 'px';
+                desmosWindow.style.top = e.clientY - offsetY + 'px';
+            }
+        }
+        function stop() {
+            isDragging = false;
+            document.removeEventListener('mousemove', move);
+            document.removeEventListener('mouseup', stop);
+        }
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', stop);
+    });
+
+    // Initialize display and start intervals
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById("urlText").textContent = url;
+        document.getElementById("EmbeddedPage").src = url;
+
+        // Time update
+        setInterval(() => {
+            if (clockEnabled) {
+                document.getElementById('timeDisplay').textContent = new Date().toLocaleTimeString();
+            }
+        }, 1000);
+
+        // FPS update
+        let lastFrameTime = performance.now();
+        setInterval(() => {
+            const now = performance.now();
+            const fps = Math.round(1000 / (now - lastFrameTime));
+            lastFrameTime = now;
+            if (fpsEnabled) {
+                document.getElementById('fpsCounter').textContent = 'FPS: ' + fps;
+            }
+        }, 15);
+
+        // Ping update
+        setInterval(() => {
+            if (pingEnabled) {
+                const start = performance.now();
+                fetch('https://www.google.com', { mode: 'no-cors' }).then(() => {
+                    const ping = Math.round(performance.now() - start);
+                    document.getElementById('pingCounter').textContent = 'Ping: ' + ping + ' ms';
+                }).catch(() => {
+                    document.getElementById('pingCounter').textContent = 'Ping: N/A';
+                });
+            }
+        }, 1000);
+
+        // Toggle settings handlers
+        document.getElementById('toggleClock').addEventListener('click', () => {
+            clockEnabled = !clockEnabled;
+            document.getElementById('toggleClock').textContent = clockEnabled ? 'Enabled' : 'Disabled';
+        });
+        document.getElementById('toggleFPS').addEventListener('click', () => {
+            fpsEnabled = !fpsEnabled;
+            document.getElementById('toggleFPS').textContent = fpsEnabled ? 'Enabled' : 'Disabled';
+        });
+        document.getElementById('togglePing').addEventListener('click', () => {
+            pingEnabled = !pingEnabled;
+            document.getElementById('togglePing').textContent = pingEnabled ? 'Enabled' : 'Disabled';
+        });
+        document.getElementById('closeMenu').addEventListener('click', () => {
+            settingsMenu.style.display = 'none';
+        });
+        document.getElementById('moveUiBox').addEventListener('click', () => {
+            moveUiEnabled = !moveUiEnabled;
+            document.getElementById('moveUiBox').textContent = moveUiEnabled ? 'Disable Drag' : 'Enable Drag';
+            if (moveUiEnabled) {
+                enableDragging(uiBox);
+            } else {
+                uiBox.onmousedown = null;
+            }
+        });
+
+        // Function to enable dragging of elements
+        function enableDragging(element) {
+            element.onmousedown = (e) => {
+                let startX = e.clientX;
+                let startY = e.clientY;
+                let rect = element.getBoundingClientRect();
+
+                function move(e) {
+                    element.style.left = e.clientX - (startX - rect.left) + 'px';
+                    element.style.top = e.clientY - (startY - rect.top) + 'px';
+                }
+                function stop() {
+                    document.removeEventListener('mousemove', move);
+                    document.removeEventListener('mouseup', stop);
+                }
+                document.addEventListener('mousemove', move);
+                document.addEventListener('mouseup', stop);
+            };
+            element.ondragstart = () => false;
+        }
+
+        // Optional toggle for settings menu with ShiftRight
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'ShiftRight') {
+                settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
+            }
+        });
+
+        // Show/hide buttons initially
+        resetHideTimeout();
+    });
+</\script>
+</body>
+</html>
+    `;
+    newTab.document.write(pageContent);
+    newTab.document.close();
+}
+
+
+
+document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.key === "z") {
+                window.location.href = "https://myapps.classlink.com/home"; // Redirect to Google Drive
+            }
+        });
+
+        setTimeout(() => {
+        let announcement = document.querySelector(".announcement-evade");
+        if (announcement) {
+            announcement.classList.add("fade-out");
+
+            // Remove element after fade-out completes (1s)
+            setTimeout(() => {
+                if (announcement) {
+                    announcement.style.display = "none";
+                }
+            }, 1000);
+        }
+    }, 10000);
+
+
+        // Delay fade-out effect to prevent instant disappearance
+        setTimeout(() => {
+            let announcement = document.getElementById("announcement-Roblox1");
+            if (announcement) {
+                announcement.classList.add("fade-out");
+                
+                // OPTIONAL: Remove element after fade-out completes (1s)
+                setTimeout(() => {
+                    if (announcement) {
+                        announcement.style.display = "none";
+                    }
+                }, 1000);
+            }
+        }, 10000);
+
+
+function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('timeDisplay').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
+
+document.getElementById("openNewTabButton").addEventListener("click", function() {
+    let input = document.getElementById("urlInput").value.trim();
+    let url;
+
+    if (input.startsWith("https://")) {
+        // If the input starts with https://, use it as is.
+        url = input;
+    } else {
+        // Use the selected search engine (Google or Bing) for searching.
+        const baseUrl = currentSearchEngine === "google" 
+            ? "https://www.google.com/search?igu=1&q=" 
+            : "https://www.bing.com/search?adlt=strict&q=";
+        url = baseUrl + encodeURIComponent(input);
+    }
+
+    loadWebsiteInNewTab(url);
+});
+document.getElementById("urlInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        document.getElementById("openNewTabButton").click();
+    }
+});
+
+document.getElementById("settingsButton").addEventListener("click", function() {
+    document.getElementById("settingsMenu").style.display = "block";
+});
+
+document.getElementById("closeMenu").addEventListener("click", function() {
+    document.getElementById("settingsMenu").style.display = "none";
+});
+
+document.querySelector(".url-panic").addEventListener("click", function() {
+            window.location.href = "https://drive.google.com"; // Redirect to Google Drive
+        });
+
+document.getElementById("resetButton").addEventListener("click", function() {
+    document.getElementById("titleInput").value = 'Home - Google Drive';
+    document.getElementById("faviconInput").value = 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png';
+});
+
+document.getElementById("googleButton").addEventListener("click", function() {
+    currentSearchEngine = "google";
+    this.classList.add("active");
+    document.getElementById("bingButton").classList.remove("active");
+});
+
+document.getElementById("bingButton").addEventListener("click", function() {
+    currentSearchEngine = "bing";
+    this.classList.add("active");
+    document.getElementById("googleButton").classList.remove("active");
+});
+
+document.getElementById("particlesToggle").addEventListener("click", function() {
+    particlesEnabled = !particlesEnabled;
+    this.classList.toggle("active");
+    if (particlesEnabled) {
+        startParticles();
+    } else {
+        stopParticles();
+    }
+});
+
+const canvas = document.getElementById("particleCanvas");
+const ctx = canvas.getContext("2d");
+
+// Update canvas size to cover the full scrollable height
+function updateCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.documentElement.scrollHeight; // Full document height
+}
+
+updateCanvasSize(); // Initial setup
+
+let particles = [];
+
+function createParticles() {
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speed: Math.random() * 2 + 0.5,
+            opacity: Math.random() * 0.5 + 0.3
+        });
+    }
+}
+
+function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+        ctx.fill();
+    });
+}
+
+function updateParticles() {
+    particles.forEach(p => {
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = -p.size; // Reset particle to the top
+    });
+}
+
+  eruda.init();
+
+function animateParticles() {
+    if (particlesEnabled) {
+        drawParticles();
+        updateParticles();
+        requestAnimationFrame(animateParticles);
+    }
+}
+
+function startParticles() {
+    particles = [];
+    createParticles();
+    animateParticles();
+}
+
+function stopParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Resize canvas and reinitialize particles when the window or document size changes
+window.addEventListener("resize", () => {
+    updateCanvasSize();
+    if (particlesEnabled) startParticles();
+});
+
+// Add listener for scroll events to ensure particles remain visible
+window.addEventListener("scroll", () => {
+    canvas.height = document.documentElement.scrollHeight;
+});
+
+startParticles();
+</script>
+
+
+</body>
+</html>
