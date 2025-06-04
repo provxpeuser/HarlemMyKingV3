@@ -1149,201 +1149,204 @@ const songs = [
 
 
 
- function loadWebsiteInNewTab(url) {
-    const title = 'Home - Google Drive';
-    const favicon = 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png';
-    const newTab = window.open();
-
-    const pageContent = `
+function loadWebsiteInNewTab(url) {
+  const pageContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${title}</title>
-<link rel="icon" href="${favicon}" type="image/x-icon" />
+<title>Home - Google Drive</title>
+<link rel="icon" href="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" />
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-image: linear-gradient(to bottom, red, lightcoral);
-        height: 100vh;
-        position: relative;
-    }
-    .viewer-container {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-    }
-    embed {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    .url-bar {
-        position: absolute;
-        top: 6px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #ff4d4d;
-        padding: 10px 20px;
-        border-radius: 30px;
-        font-size: 17px;
-        font-weight: bold;
-        color: black;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .url-bar span {
-        background: rgba(255, 255, 255, 0.3);
-        padding: 8px 15px;
-        border-radius: 20px;
-    }
-    .ui-box {
-        position: fixed;
-        top: 555px;
-        right: 24px;
-        background: rgba(211, 47, 47, 0.9);
-        color: white;
-        padding: 10px;
-        border-radius: 10px;
-        font-size: 14px;
-        cursor: grab;
-        box-shadow: 0 0 10px rgba(211, 47, 47, 0.8);
-        transition: transform 0.2s ease-in-out;
-    }
-    #settingsMenu {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
-        background: rgba(0, 0, 0, 0.95);
-        border-radius: 10px;
-        padding: 20px;
-        color: white;
-        display: none;
-        z-index: 2000;
-    }
-    .setting-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        background: #222;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-    .toggle-btn {
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    .enabled {
-        background: green;
-        color: white;
-    }
-    .close-btn {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        background: red;
-        border: none;
-        color: white;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-    }
-    .close-btn:hover {
-        background: darkred;
-    }
-    /* Button container styles */
-    .button-container {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        display: flex;
-        gap: 10px; 
-    }
-    #toggleButton, #driveButton, #desmosButton {
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 50%; 
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        z-index: 100;
-    }
-    #toggleButton.hidden, #driveButton.hidden, #desmosButton.hidden {
-        opacity: 0.5; 
-    }
-    #toggleButton img, #driveButton img, #desmosButton img {
-        width: 24px; 
-        height: 24px; 
-    }
-    /* Styles for the draggable Desmos window */
-    #desmosWindow {
-        position: fixed;
-        width: 400px;
-        height: 300px;
-        top: 100px;
-        left: 100px;
-        background: #fff;
-        border: 2px solid #333;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 2001;
-        display: none;
-        border-radius: 8px;
-        overflow: hidden;
-        /* Make unhighlightable */
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        outline: none;
-    }
-    #desmosHeader {
-        background: #f0f0f0;
-        padding: 5px 10px;
-        cursor: grab;
-        font-weight: bold;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        /* Make unhighlightable */
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        outline: none;
-    }
-    #closeDesmos {
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        outline: none;
-    }
-    #desmosContent {
-        width: 100%;
-        height: calc(100% - 30px);
-        /* Make unhighlightable */
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        outline: none;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: linear-gradient(to bottom, red, lightcoral);
+  height: 100vh;
+  position: relative;
+}
+
+/* Make everything non-highlightable */
+* {
+  user-select: none;
+  -webkit-user-select: none; /* Chrome, Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+}
+
+.viewer-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+embed {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.url-bar {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4d4d;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.url-bar span {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+.ui-box {
+  position: fixed;
+  top: 555px;
+  right: 24px;
+  background: rgba(211, 47, 47, 0.9);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: grab;
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.8);
+  transition: transform 0.2s ease-in-out;
+}
+
+#settingsMenu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: rgba(0, 0, 0, 0.95);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  display: none;
+  z-index: 2000;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #222;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.toggle-btn {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.enabled {
+  background: green;
+  color: white;
+}
+
+.close-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: red;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.close-btn:hover {
+  background: darkred;
+}
+
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+#toggleButton, #driveButton, #desmosButton {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 100;
+}
+
+#toggleButton.hidden, #driveButton.hidden, #desmosButton.hidden {
+  opacity: 0.5;
+}
+
+#toggleButton img, #driveButton img, #desmosButton img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Desmos window styles */
+#desmosWindow {
+  position: fixed;
+  width: 400px;
+  height: 300px;
+  top: 100px;
+  left: 100px;
+  background: #fff;
+  border: 2px solid #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 2001;
+  display: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#desmosHeader {
+  background: #f0f0f0;
+  padding: 5px 10px;
+  cursor: grab;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeDesmos {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#desmosContent {
+  width: 100%;
+  height: calc(100% - 30px);
+}
 </style>
 </head>
 <body>
 
 <div class="viewer-container">
-    <embed id="EmbeddedPage" src="https://www.google.com"></embed>
+    <embed id="EmbeddedPage" src="${url}"></embed>
 </div>
 
 <div class="url-bar">
-    <span id="urlText"></span>
+    <span id="urlText">${url}</span>
 </div>
 
 <div class="ui-box" id="uiBox">
@@ -1384,13 +1387,12 @@ const songs = [
     <button id="driveButton" title="Google Drive">
         <img src="https://assets.streamlinehq.com/image/private/w_240,h_240,ar_1/f_auto/v1/icons/professional-tools/professional-tool-google-drive-118bd5l4qqqt5pdhxocnt.png/professional-tool-google-drive-g4c61iv4bbcvy0x3kdtfjf.png?_a=DAJFJtWIZAAC" alt="Drive"/>
     </button>
-    <!-- New button for Desmos calculator -->
     <button id="desmosButton" title="Open Desmos Calculator">
         <img src="https://www.iconsdb.com/icons/preview/black/calculator-8-xxl.png" alt="Desmos"/>
     </button>
 </div>
 
-<!-- Draggable Desmos window -->
+<!-- Desmos window -->
 <div id="desmosWindow">
     <div id="desmosHeader">
         Desmos Scientific Calculator
@@ -1402,201 +1404,219 @@ const songs = [
 </div>
 
 <script>
-    let url = "${url}";
-    document.getElementById("urlText").textContent = url;
-    document.getElementById("EmbeddedPage").src = url;
+window.onload = () => {
+  const url = "${url}";
+  document.getElementById("urlText").textContent = url;
+  document.getElementById("EmbeddedPage").src = url;
 
-    let clockEnabled = true;
-    let fpsEnabled = true;
-    let pingEnabled = true;
-    let moveUiEnabled = false;
+  let clockEnabled = true;
+  let fpsEnabled = true;
+  let pingEnabled = true;
+  let moveUiEnabled = false;
+  let urlBarEnabled = true;
 
-    const toggleButton = document.getElementById('toggleButton');
-    const driveButton = document.getElementById('driveButton');
-    const desmosButton = document.getElementById('desmosButton');
-
-    const settingsMenu = document.getElementById('settingsMenu');
-    const uiBox = document.getElementById('uiBox');
-
-    const desmosWindow = document.getElementById('desmosWindow');
-    const closeDesmos = document.getElementById('closeDesmos');
-    const desmosHeader = document.getElementById('desmosHeader');
-
-    let hideTimeout;
-    let driveClickCount = 0;
-
-    // Show/hide UI buttons on hover
-    function showButton() {
-        toggleButton.classList.remove('hidden');
-        driveButton.classList.remove('hidden');
-        desmosButton.classList.remove('hidden');
-        resetHideTimeout();
+    function updateTime() {
+        if (clockEnabled) {
+            const now = new Date();
+            document.getElementById('timeDisplay').textContent = now.toLocaleTimeString();
+        }
     }
-    function resetHideTimeout() {
-        clearTimeout(hideTimeout);
-        hideTimeout = setTimeout(() => {
-            toggleButton.classList.add('hidden');
-            driveButton.classList.add('hidden');
-            desmosButton.classList.add('hidden');
-        }, 5000);
-    }
-    toggleButton.addEventListener('mouseenter', showButton);
-    driveButton.addEventListener('mouseenter', showButton);
-    desmosButton.addEventListener('mouseenter', showButton);
-    toggleButton.addEventListener('mouseleave', resetHideTimeout);
-    driveButton.addEventListener('mouseleave', resetHideTimeout);
-    desmosButton.addEventListener('mouseleave', resetHideTimeout);
+    setInterval(updateTime, 1000);
+    updateTime();
 
-    // Settings button
-    toggleButton.addEventListener('click', () => {
-        settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
+  const toggleButton = document.getElementById('toggleButton');
+  const driveButton = document.getElementById('driveButton');
+  const desmosButton = document.getElementById('desmosButton');
+
+  const settingsMenu = document.getElementById('settingsMenu');
+  const uiBox = document.getElementById('uiBox');
+
+  const desmosWindow = document.getElementById('desmosWindow');
+
+  let hideTimeout;
+  let driveClickCount = 0;
+
+  // Show/hide buttons on hover
+  function showButton() {
+      toggleButton.classList.remove('hidden');
+      driveButton.classList.remove('hidden');
+      desmosButton.classList.remove('hidden');
+      resetHideTimeout();
+  }
+  function resetHideTimeout() {
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+          toggleButton.classList.add('hidden');
+          driveButton.classList.add('hidden');
+          desmosButton.classList.add('hidden');
+      }, 5000);
+  }
+  toggleButton.addEventListener('mouseenter', showButton);
+  driveButton.addEventListener('mouseenter', showButton);
+  desmosButton.addEventListener('mouseenter', showButton);
+  toggleButton.addEventListener('mouseleave', resetHideTimeout);
+  driveButton.addEventListener('mouseleave', resetHideTimeout);
+  desmosButton.addEventListener('mouseleave', resetHideTimeout);
+
+  // Settings button toggles settings menu
+  toggleButton.addEventListener('click', () => {
+      settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
+  });
+
+  // Drive button logic
+  driveButton.addEventListener('click', () => {
+      driveClickCount++;
+      if (driveClickCount === 2) {
+          location.href = "https://drive.google.com";
+          driveClickCount = 0;
+      } else {
+          setTimeout(() => { driveClickCount = 0; }, 300);
+      }
+  });
+
+  // Toggle Desmos window
+  desmosButton.addEventListener('click', () => {
+      if (desmosWindow.style.display === 'none' || desmosWindow.style.display === '') {
+          desmosWindow.style.display = 'block';
+      } else {
+          desmosWindow.style.display = 'none';
+      }
+  });
+
+  // Close Desmos window
+  document.getElementById('closeDesmos').addEventListener('click', () => {
+      desmosWindow.style.display = 'none';
+  });
+
+  // Dragging Desmos window
+  document.getElementById('desmosHeader').addEventListener('mousedown', (e) => {
+      let isDragging = true;
+      let offsetX = e.clientX - desmosWindow.offsetLeft;
+      let offsetY = e.clientY - desmosWindow.offsetTop;
+
+      function move(e) {
+          if (isDragging) {
+              desmosWindow.style.left = e.clientX - offsetX + 'px';
+              desmosWindow.style.top = e.clientY - offsetY + 'px';
+          }
+      }
+      function stop() {
+          isDragging = false;
+          document.removeEventListener('mousemove', move);
+          document.removeEventListener('mouseup', stop);
+      }
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', stop);
+  });
+
+    document.getElementById('toggleClock').addEventListener('click', function () {
+        clockEnabled = !clockEnabled;
+        this.textContent = clockEnabled ? 'Enabled' : 'Disabled';
+        this.classList.toggle('enabled', clockEnabled);
+        document.getElementById('timeDisplay').style.display = clockEnabled ? 'inline' : 'none';
     });
 
-    // Drive button
-    driveButton.addEventListener('click', () => {
-        driveClickCount++;
-        if (driveClickCount === 2) {
-            location.href = "https://drive.google.com";
-            driveClickCount = 0;
-        } else {
-            setTimeout(() => { driveClickCount = 0; }, 300);
-        }
-    });
+  // FPS update
+  let lastFrameTime = performance.now();
+  setInterval(() => {
+      const now = performance.now();
+      const fps = Math.round(1000 / (now - lastFrameTime));
+      lastFrameTime = now;
+      if (fpsEnabled) {
+          document.getElementById('fpsCounter').textContent = 'FPS: ' + fps;
+      }
+  }, 15);
 
-    // Desmos button toggles window
-    desmosButton.addEventListener('click', () => {
-        if (desmosWindow.style.display === 'none' || desmosWindow.style.display === '') {
-            desmosWindow.style.display = 'block';
-        } else {
-            desmosWindow.style.display = 'none';
-        }
-    });
+  // Ping update
+  setInterval(() => {
+      if (pingEnabled) {
+          const start = performance.now();
+          fetch('https://www.google.com', { mode: 'no-cors' }).then(() => {
+              const ping = Math.round(performance.now() - start);
+              document.getElementById('pingCounter').textContent = 'Ping: ' + ping + ' ms';
+          }).catch(() => {
+              document.getElementById('pingCounter').textContent = 'Ping: N/A';
+          });
+      }
+  }, 1000);
 
-    // Close Desmos window
-    document.getElementById('closeDesmos').addEventListener('click', () => {
-        desmosWindow.style.display = 'none';
-    });
+  // Toggle FPS
+  document.getElementById('toggleFPS').addEventListener('click', function () {
+      fpsEnabled = !fpsEnabled;
+      this.textContent = fpsEnabled ? 'Enabled' : 'Disabled';
+      this.classList.toggle('enabled', fpsEnabled);
+      document.getElementById('fpsCounter').style.display = fpsEnabled ? 'inline' : 'none';
+  });
 
-    // Dragging for Desmos window
-    desmosHeader.addEventListener('mousedown', (e) => {
-        let isDragging = true;
-        let offsetX = e.clientX - desmosWindow.offsetLeft;
-        let offsetY = e.clientY - desmosWindow.offsetTop;
+  // Toggle Ping
+  document.getElementById('togglePing').addEventListener('click', () => {
+      pingEnabled = !pingEnabled;
+      document.getElementById('togglePing').textContent = pingEnabled ? 'Enabled' : 'Disabled';
+      document.getElementById('togglePing').classList.toggle('enabled', pingEnabled);
+      document.getElementById('pingCounter').style.display = pingEnabled ? 'inline' : 'none';
+  });
 
-        function move(e) {
-            if (isDragging) {
-                desmosWindow.style.left = e.clientX - offsetX + 'px';
-                desmosWindow.style.top = e.clientY - offsetY + 'px';
-            }
-        }
-        function stop() {
-            isDragging = false;
-            document.removeEventListener('mousemove', move);
-            document.removeEventListener('mouseup', stop);
-        }
-        document.addEventListener('mousemove', move);
-        document.addEventListener('mouseup', stop);
-    });
+  // Toggle URL Bar
+  document.getElementById('toggleUrlBar').addEventListener('click', () => {
+      urlBarEnabled = !urlBarEnabled;
+      document.querySelector('.url-bar').style.display = urlBarEnabled ? 'block' : 'none';
 
-    // Initialize display and start intervals
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById("urlText").textContent = url;
-        document.getElementById("EmbeddedPage").src = url;
+      // Update button appearance
+      const btn = document.getElementById('toggleUrlBar');
+      btn.textContent = urlBarEnabled ? 'Enabled' : 'Disabled';
+      btn.classList.toggle('enabled', urlBarEnabled);
+  });
 
-        // Time update
-        setInterval(() => {
-            if (clockEnabled) {
-                document.getElementById('timeDisplay').textContent = new Date().toLocaleTimeString();
-            }
-        }, 1000);
+  // Close settings menu
+  document.querySelector('.close-btn').addEventListener('click', () => {
+      settingsMenu.style.display = 'none';
+  });
 
-        // FPS update
-        let lastFrameTime = performance.now();
-        setInterval(() => {
-            const now = performance.now();
-            const fps = Math.round(1000 / (now - lastFrameTime));
-            lastFrameTime = now;
-            if (fpsEnabled) {
-                document.getElementById('fpsCounter').textContent = 'FPS: ' + fps;
-            }
-        }, 15);
+  // Move UI Box toggle
+  document.getElementById('moveUiBox').addEventListener('click', () => {
+      moveUiEnabled = !moveUiEnabled;
+      document.getElementById('moveUiBox').textContent = moveUiEnabled ? 'Disable Drag' : 'Enable Drag';
+      if (moveUiEnabled) {
+          enableDragging(uiBox);
+      } else {
+          uiBox.onmousedown = null;
+      }
+  });
 
-        // Ping update
-        setInterval(() => {
-            if (pingEnabled) {
-                const start = performance.now();
-                fetch('https://www.google.com', { mode: 'no-cors' }).then(() => {
-                    const ping = Math.round(performance.now() - start);
-                    document.getElementById('pingCounter').textContent = 'Ping: ' + ping + ' ms';
-                }).catch(() => {
-                    document.getElementById('pingCounter').textContent = 'Ping: N/A';
-                });
-            }
-        }, 1000);
+  // Drag function
+  function enableDragging(element) {
+      element.onmousedown = (e) => {
+          let startX = e.clientX;
+          let startY = e.clientY;
+          let rect = element.getBoundingClientRect();
+          function move(e) {
+              element.style.left = e.clientX - (startX - rect.left) + 'px';
+              element.style.top = e.clientY - (startY - rect.top) + 'px';
+          }
+          function stop() {
+              document.removeEventListener('mousemove', move);
+              document.removeEventListener('mouseup', stop);
+          }
+          document.addEventListener('mousemove', move);
+          document.addEventListener('mouseup', stop);
+      };
+      element.ondragstart = () => false;
+  }
 
-        // Toggle settings handlers
-        document.getElementById('toggleClock').addEventListener('click', () => {
-            clockEnabled = !clockEnabled;
-            document.getElementById('toggleClock').textContent = clockEnabled ? 'Enabled' : 'Disabled';
-        });
-        document.getElementById('toggleFPS').addEventListener('click', () => {
-            fpsEnabled = !fpsEnabled;
-            document.getElementById('toggleFPS').textContent = fpsEnabled ? 'Enabled' : 'Disabled';
-        });
-        document.getElementById('togglePing').addEventListener('click', () => {
-            pingEnabled = !pingEnabled;
-            document.getElementById('togglePing').textContent = pingEnabled ? 'Enabled' : 'Disabled';
-        });
-        document.getElementById('closeMenu').addEventListener('click', () => {
-            settingsMenu.style.display = 'none';
-        });
-        document.getElementById('moveUiBox').addEventListener('click', () => {
-            moveUiEnabled = !moveUiEnabled;
-            document.getElementById('moveUiBox').textContent = moveUiEnabled ? 'Disable Drag' : 'Enable Drag';
-            if (moveUiEnabled) {
-                enableDragging(uiBox);
-            } else {
-                uiBox.onmousedown = null;
-            }
-        });
-
-        // Function to enable dragging of elements
-        function enableDragging(element) {
-            element.onmousedown = (e) => {
-                let startX = e.clientX;
-                let startY = e.clientY;
-                let rect = element.getBoundingClientRect();
-
-                function move(e) {
-                    element.style.left = e.clientX - (startX - rect.left) + 'px';
-                    element.style.top = e.clientY - (startY - rect.top) + 'px';
-                }
-                function stop() {
-                    document.removeEventListener('mousemove', move);
-                    document.removeEventListener('mouseup', stop);
-                }
-                document.addEventListener('mousemove', move);
-                document.addEventListener('mouseup', stop);
-            };
-            element.ondragstart = () => false;
-        }
-
-        // Optional toggle for settings menu with ShiftRight
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'ShiftRight') {
-                settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
-            }
-        });
-
-        // Show/hide buttons initially
-        resetHideTimeout();
-    });
+  // Toggle settings menu with ShiftRight
+  document.addEventListener('keydown', (e) => {
+      if (e.code === 'ShiftRight') {
+          settingsMenu.style.display = (settingsMenu.style.display === 'block') ? 'none' : 'block';
+      }
+  });
+};
 </\script>
 </body>
 </html>
-    `;
-    newTab.document.write(pageContent);
-    newTab.document.close();
+`;
+  const newTab = window.open();
+  newTab.document.write(pageContent);
+  newTab.document.close();
 }
 
 
